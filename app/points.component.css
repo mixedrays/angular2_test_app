@@ -1,0 +1,8 @@
+.points-container {
+  position: absolute;
+  top: 0;
+  width: 30%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #fff; }

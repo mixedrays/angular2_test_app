@@ -1,0 +1,11 @@
+@import "styles/scss/global";
+
+.points-container {
+  position: absolute;
+  top: 0;
+  width: 30%;
+  height: 100%;
+  overflow-y: auto;
+  padding: $global-spacing;
+  background-color: $global-bg-color;
+}
