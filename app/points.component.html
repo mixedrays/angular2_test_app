@@ -1,5 +1,9 @@
 <div class="points-container">
-    <ul>
-        <li *ngFor="let point of points">{{point.title}}</li>
+    <ul class="points-list">
+        <li *ngFor="let point of points"
+            (click)="onPointClick(point)"
+            [class.visible]="point.visible"
+            class="point item"
+        >{{point.title}}</li>
     </ul>
 </div>

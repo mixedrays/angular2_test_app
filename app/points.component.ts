@@ -22,4 +22,7 @@ export class PointsComponent implements OnInit {
         this.pointService.getPoints()
             .then(points => this.points = points);
     }
+
+    onPointClick(point: Point) {
+    }
 }

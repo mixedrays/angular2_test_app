@@ -1,4 +1,5 @@
-import {Component, OnInit, ElementRef} from "@angular/core";
+import {Component, OnInit, ElementRef, ApplicationRef} from "@angular/core";
+
 import {Point} from './point.class';
 import {PointService} from './point.service';
 
@@ -23,7 +24,9 @@ export class MapComponent extends OnInit {
     constructor(
         private element:ElementRef,
         private pointService:PointService,
+        private appRef:ApplicationRef
     ) {
+        super();
     }
 
     ngOnInit() {
@@ -31,6 +34,7 @@ export class MapComponent extends OnInit {
         this.map = new google.maps.Map(this.mapContainer, this.mapConfig);
 
         this.getPoints();
+        this.initGoogleMapsListeners();
     }
 
     getPoints() {
@@ -43,6 +47,27 @@ export class MapComponent extends OnInit {
 
     onPointsResolve() {
         this.addPointsOnMap();
+    }
+
+    initGoogleMapsListeners() {
+        this.map.addListener('bounds_changed', () => {
+            this.onMapBoundsChanged();
+        });
+    }
+
+    onMapBoundsChanged() {
+        this.showMarkersInBounds();
+    }
+
+    showMarkersInBounds() {
+        let bounds = this.map.getBounds();
+
+        this.markers.forEach((marker, i) => {
+            this.points[i].visible = !!bounds.contains(marker.getPosition());
+        });
+
+        // Force points list view update
+        this.appRef.tick();
     }
 
     addPointsOnMap() {

@@ -1,11 +1,43 @@
 @import "styles/scss/global";
 
 .points-container {
-  position: absolute;
-  top: 0;
-  width: 30%;
-  height: 100%;
-  overflow-y: auto;
-  padding: $global-spacing;
-  background-color: $global-bg-color;
+    position: absolute;
+    top: 0;
+    width: 90%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: $global-sidebar-bg-color;
+    box-shadow: 0 0 7px rgba(black, .5);
+
+    @include breakpoint(medium up) {
+        width: 40%;
+    }
+
+    @include breakpoint(large up) {
+        width: 30%;
+    }
+
+    @include breakpoint(xlarge up) {
+        width: 20%;
+    }
+
+    .points-list {
+        margin: 0;
+        list-style: none;
+    }
+
+    .point {
+        display: none;
+        padding: ceil($global-spacing/2) $global-spacing;
+        border-top: 1px solid #eee;
+
+        &:first-child {
+            border-top: none;
+            padding-bottom: 1px;
+        }
+
+    	&.visible {
+            display: block;
+    	}
+    }
 }

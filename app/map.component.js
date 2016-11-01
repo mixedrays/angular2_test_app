@@ -17,9 +17,11 @@ var core_1 = require("@angular/core");
 var point_service_1 = require('./point.service');
 var MapComponent = (function (_super) {
     __extends(MapComponent, _super);
-    function MapComponent(element, pointService) {
+    function MapComponent(element, pointService, appRef) {
+        _super.call(this);
         this.element = element;
         this.pointService = pointService;
+        this.appRef = appRef;
         this.mapConfig = {
             zoom: 10,
             center: { lat: 53.900, lng: 27.567 }
@@ -30,6 +32,7 @@ var MapComponent = (function (_super) {
         this.mapContainer = this.element.nativeElement;
         this.map = new google.maps.Map(this.mapContainer, this.mapConfig);
         this.getPoints();
+        this.initGoogleMapsListeners();
     };
     MapComponent.prototype.getPoints = function () {
         var _this = this;
@@ -41,6 +44,24 @@ var MapComponent = (function (_super) {
     };
     MapComponent.prototype.onPointsResolve = function () {
         this.addPointsOnMap();
+    };
+    MapComponent.prototype.initGoogleMapsListeners = function () {
+        var _this = this;
+        this.map.addListener('bounds_changed', function () {
+            _this.onMapBoundsChanged();
+        });
+    };
+    MapComponent.prototype.onMapBoundsChanged = function () {
+        this.showMarkersInBounds();
+    };
+    MapComponent.prototype.showMarkersInBounds = function () {
+        var _this = this;
+        var bounds = this.map.getBounds();
+        this.markers.forEach(function (marker, i) {
+            _this.points[i].visible = !!bounds.contains(marker.getPosition());
+        });
+        // Force points list view update
+        this.appRef.tick();
     };
     MapComponent.prototype.addPointsOnMap = function () {
         var _this = this;
@@ -64,7 +85,7 @@ var MapComponent = (function (_super) {
             styleUrls: ['map.component.css'],
             template: ''
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, point_service_1.PointService])
+        __metadata('design:paramtypes', [core_1.ElementRef, point_service_1.PointService, core_1.ApplicationRef])
     ], MapComponent);
     return MapComponent;
 }(core_1.OnInit));

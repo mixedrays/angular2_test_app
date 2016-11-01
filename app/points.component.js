@@ -22,6 +22,8 @@ var PointsComponent = (function () {
         this.pointService.getPoints()
             .then(function (points) { return _this.points = points; });
     };
+    PointsComponent.prototype.onPointClick = function (point) {
+    };
     PointsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
