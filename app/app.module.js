@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var forms_1 = require("@angular/forms");
 var app_component_1 = require('./app.component');
 var map_component_1 = require("./map.component");
 var point_service_1 = require("./point.service");
 var points_component_1 = require("./points.component");
+var range_pipe_1 = require("./range.pipe");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -21,11 +23,13 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
+                forms_1.FormsModule
             ],
             declarations: [
                 app_component_1.AppComponent,
                 map_component_1.MapComponent,
-                points_component_1.PointsComponent
+                points_component_1.PointsComponent,
+                range_pipe_1.RangePipe
             ],
             providers: [
                 point_service_1.PointService

@@ -45,6 +45,10 @@ export class MapComponent extends OnInit {
             });
     }
 
+    getPointLatLng(point: Point) {
+        return new google.maps.LatLng({lat: point.lat, lng: point.lng});
+    }
+
     onPointsResolve() {
         this.addPointsOnMap();
     }
@@ -56,18 +60,23 @@ export class MapComponent extends OnInit {
     }
 
     onMapBoundsChanged() {
-        this.showMarkersInBounds();
+        this.showPointsInBounds();
     }
 
-    showMarkersInBounds() {
+    showPointsInBounds() {
         let bounds = this.map.getBounds();
 
-        this.markers.forEach((marker, i) => {
-            this.points[i].visible = !!bounds.contains(marker.getPosition());
+        this.points.forEach((point) => {
+            point.visible = bounds.contains(this.getPointLatLng(point));
         });
 
         // Force points list view update
         this.appRef.tick();
+    }
+
+    isPointInBounds(point: Point):boolean {
+        // Method dummy
+        return false;
     }
 
     addPointsOnMap() {

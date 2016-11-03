@@ -10,6 +10,7 @@ import {PointService} from './point.service';
 })
 export class PointsComponent implements OnInit {
     private points:Point[];
+    private range:number = 100;
 
     constructor(private pointService:PointService) {
     }

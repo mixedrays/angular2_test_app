@@ -42,6 +42,9 @@ var MapComponent = (function (_super) {
             _this.onPointsResolve();
         });
     };
+    MapComponent.prototype.getPointLatLng = function (point) {
+        return new google.maps.LatLng({ lat: point.lat, lng: point.lng });
+    };
     MapComponent.prototype.onPointsResolve = function () {
         this.addPointsOnMap();
     };
@@ -52,16 +55,20 @@ var MapComponent = (function (_super) {
         });
     };
     MapComponent.prototype.onMapBoundsChanged = function () {
-        this.showMarkersInBounds();
+        this.showPointsInBounds();
     };
-    MapComponent.prototype.showMarkersInBounds = function () {
+    MapComponent.prototype.showPointsInBounds = function () {
         var _this = this;
         var bounds = this.map.getBounds();
-        this.markers.forEach(function (marker, i) {
-            _this.points[i].visible = !!bounds.contains(marker.getPosition());
+        this.points.forEach(function (point) {
+            point.visible = bounds.contains(_this.getPointLatLng(point));
         });
         // Force points list view update
         this.appRef.tick();
+    };
+    MapComponent.prototype.isPointInBounds = function (point) {
+        // Method dummy
+        return false;
     };
     MapComponent.prototype.addPointsOnMap = function () {
         var _this = this;

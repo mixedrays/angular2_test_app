@@ -1,6 +1,11 @@
 <div class="points-container">
+    <div class="filters">
+        <input type="range"
+               [(ngModel)]="range">
+        {{range}}
+    </div>
     <ul class="points-list">
-        <li *ngFor="let point of points"
+        <li *ngFor="let point of (points | range:range)"
             (click)="onPointClick(point)"
             [class.visible]="point.visible"
             class="point item"

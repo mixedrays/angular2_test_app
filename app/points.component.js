@@ -13,6 +13,7 @@ var point_service_1 = require('./point.service');
 var PointsComponent = (function () {
     function PointsComponent(pointService) {
         this.pointService = pointService;
+        this.range = 100;
     }
     PointsComponent.prototype.ngOnInit = function () {
         this.getPoints();
