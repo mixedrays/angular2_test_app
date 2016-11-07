@@ -1,7 +1,7 @@
 import {Component, OnInit, ElementRef, ApplicationRef} from "@angular/core";
 
 import {Point} from './point.class';
-import {PointService} from './point.service';
+import {PointsService} from './points.service';
 
 declare var google:any;
 
@@ -9,7 +9,10 @@ declare var google:any;
     moduleId: module.id,
     selector: 'map-component',
     styleUrls: ['map.component.css'],
-    template: ''
+    template: `
+        <div id="googleMap"></div>
+        <markers-list-component [markers]="markers"></markers-list-component>
+        `
 })
 export class MapComponent extends OnInit {
     private map;
@@ -18,39 +21,27 @@ export class MapComponent extends OnInit {
         zoom: 10,
         center: {lat: 53.900, lng: 27.567}
     };
-    private points:Point[];
     private markers:Object[] = [];
 
     constructor(
         private element:ElementRef,
-        private pointService:PointService,
+        private pointsService:PointsService,
         private appRef:ApplicationRef
     ) {
         super();
     }
 
     ngOnInit() {
-        this.mapContainer = this.element.nativeElement;
+        this.mapContainer = this.element.nativeElement.querySelector('#googleMap');
         this.map = new google.maps.Map(this.mapContainer, this.mapConfig);
 
-        this.getPoints();
-        this.initGoogleMapsListeners();
-    }
-
-    getPoints() {
-        this.pointService.getPoints()
+        this.pointsService.getPoints()
             .then(points => {
-                this.points = points;
-                this.onPointsResolve();
+                this.markers = points;
+                this.addGoogleMapsMarker();
             });
-    }
 
-    getPointLatLng(point: Point) {
-        return new google.maps.LatLng({lat: point.lat, lng: point.lng});
-    }
-
-    onPointsResolve() {
-        this.addPointsOnMap();
+        this.initGoogleMapsListeners();
     }
 
     initGoogleMapsListeners() {
@@ -66,33 +57,23 @@ export class MapComponent extends OnInit {
     showPointsInBounds() {
         let bounds = this.map.getBounds();
 
-        this.points.forEach((point) => {
-            point.visible = bounds.contains(this.getPointLatLng(point));
+        this.markers.forEach((marker) => {
+            marker.visible = bounds.contains(marker.getPosition());
         });
 
         // Force points list view update
         this.appRef.tick();
     }
 
-    isPointInBounds(point: Point):boolean {
-        // Method dummy
-        return false;
-    }
+    addGoogleMapsMarker() {
+        this.markers.forEach((point, i) => {
+            let newMarker = new google.maps.Marker({
+                position: {lat: point.lat, lng: point.lng},
+                map: this.map
+            });
 
-    addPointsOnMap() {
-        this.points.forEach((point:Point) => this.addGoogleMapsMarker(point));
-    }
-
-    addGoogleMapsMarker(marker:Point) {
-        let newMarker = new google.maps.Marker({
-            position: {
-                lat: marker.lat,
-                lng: marker.lng,
-            },
-            title: marker.title,
-            map: this.map
+            // Mutate points into google maps markers
+            this.markers[i] = Object.assign(newMarker, point);
         });
-
-        this.markers.push(newMarker);
     }
 }

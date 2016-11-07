@@ -1,0 +1,14 @@
+<div class="markers-list-container">
+    <div class="filters">
+        <input type="range"
+               [(ngModel)]="range">
+        {{range}}
+    </div>
+    <ul class="markers-list">
+        <li *ngFor="let marker of (markers | range:range)"
+            (click)="onPointClick(marker)"
+            [class.visible]="marker.visible"
+            class="marker item"
+        >{{marker.title}}</li>
+    </ul>
+</div>

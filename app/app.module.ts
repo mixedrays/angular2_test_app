@@ -4,8 +4,8 @@ import {FormsModule} from "@angular/forms";
 
 import {AppComponent} from './app.component';
 import {MapComponent} from "./map.component";
-import {PointService} from "./point.service";
-import {PointsComponent} from "./points.component";
+import {PointsService} from "./points.service";
+import {MarkersListComponent} from "./markers-list.component";
 import {RangePipe} from "./range.pipe";
 
 @NgModule({
@@ -16,11 +16,11 @@ import {RangePipe} from "./range.pipe";
     declarations: [
         AppComponent,
         MapComponent,
-        PointsComponent,
+        MarkersListComponent,
         RangePipe
     ],
     providers: [
-        PointService
+        PointsService
     ],
     bootstrap: [
         AppComponent

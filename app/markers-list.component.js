@@ -9,32 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var point_service_1 = require('./point.service');
-var PointsComponent = (function () {
-    function PointsComponent(pointService) {
-        this.pointService = pointService;
+var MarkersListComponent = (function () {
+    function MarkersListComponent() {
         this.range = 100;
     }
-    PointsComponent.prototype.ngOnInit = function () {
-        this.getPoints();
+    MarkersListComponent.prototype.onPointClick = function (marker) {
     };
-    PointsComponent.prototype.getPoints = function () {
-        var _this = this;
-        this.pointService.getPoints()
-            .then(function (points) { return _this.points = points; });
-    };
-    PointsComponent.prototype.onPointClick = function (point) {
-    };
-    PointsComponent = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], MarkersListComponent.prototype, "markers", void 0);
+    MarkersListComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'points-component',
-            templateUrl: 'points.component.html',
-            styleUrls: ['points.component.css']
+            selector: 'markers-list-component',
+            templateUrl: 'markers-list.component.html',
+            styleUrls: ['markers-list.component.css']
         }), 
-        __metadata('design:paramtypes', [point_service_1.PointService])
-    ], PointsComponent);
-    return PointsComponent;
+        __metadata('design:paramtypes', [])
+    ], MarkersListComponent);
+    return MarkersListComponent;
 }());
-exports.PointsComponent = PointsComponent;
-//# sourceMappingURL=points.component.js.map
+exports.MarkersListComponent = MarkersListComponent;
+//# sourceMappingURL=markers-list.component.js.map

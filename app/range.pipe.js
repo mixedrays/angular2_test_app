@@ -8,19 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var points_mock_1 = require('./points.mock');
-var PointService = (function () {
-    function PointService() {
+var core_1 = require('@angular/core');
+var RangePipe = (function () {
+    function RangePipe() {
     }
-    PointService.prototype.getPoints = function () {
-        return Promise.resolve(points_mock_1.POINTS);
+    RangePipe.prototype.transform = function (value, args) {
+        if (!value)
+            return false;
+        // Pipe test
+        return value.filter(function (item) {
+            var filtered = item.title.length < +args;
+            item.setVisible(filtered);
+            return filtered;
+        });
     };
-    PointService = __decorate([
-        core_1.Injectable(), 
+    RangePipe = __decorate([
+        core_1.Pipe({
+            name: 'range'
+        }), 
         __metadata('design:paramtypes', [])
-    ], PointService);
-    return PointService;
+    ], RangePipe);
+    return RangePipe;
 }());
-exports.PointService = PointService;
-//# sourceMappingURL=point.service.js.map
+exports.RangePipe = RangePipe;
+//# sourceMappingURL=range.pipe.js.map

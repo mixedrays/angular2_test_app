@@ -1,4 +1,4 @@
-.points-container {
+.markers-list-container {
   position: absolute;
   top: 0;
   width: 90%;
@@ -8,29 +8,29 @@
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); }
 
 @media screen and (min-width: 40em) {
-  .points-container {
+  .markers-list-container {
     width: 40%; } }
 
 @media screen and (min-width: 64em) {
-  .points-container {
-    width: 30%; } }
+  .markers-list-container {
+    width: 35%; } }
 
 @media screen and (min-width: 75em) {
-  .points-container {
-    width: 20%; } }
+  .markers-list-container {
+    width: 25%; } }
 
-.points-container .points-list {
+.markers-list-container .markers-list {
   margin: 0;
   list-style: none; }
 
-.points-container .point {
+.markers-list-container .marker {
   display: none;
   padding: 8px 15px;
   border-top: 1px solid #eee; }
 
-.points-container .point:first-child {
+.markers-list-container .marker:first-child {
   border-top: none;
   padding-bottom: 1px; }
 
-.points-container .point.visible {
+.markers-list-container .marker.visible {
   display: block; }
