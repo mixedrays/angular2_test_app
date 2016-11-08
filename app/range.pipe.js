@@ -17,7 +17,7 @@ var RangePipe = (function () {
             return false;
         // Pipe test
         return value.filter(function (item) {
-            var filtered = item.title.length < +args;
+            var filtered = item.address.length < +args;
             item.setVisible(filtered);
             return filtered;
         });

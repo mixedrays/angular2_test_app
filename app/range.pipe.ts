@@ -9,7 +9,7 @@ export class RangePipe implements PipeTransform {
 
         // Pipe test
         return value.filter(item => {
-            let filtered = item.title.length < +args;
+            let filtered = item.address.length < +args;
 
             item.setVisible(filtered);
             return filtered;
