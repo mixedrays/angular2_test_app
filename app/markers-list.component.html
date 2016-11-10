@@ -1,11 +1,14 @@
 <div class="markers-list-container">
     <div class="filters">
-        <input type="range"
-               [(ngModel)]="range">
+        <input type="range" [(ngModel)]="range">
         {{range}}
+        <input type="range" [(ngModel)]="rating" min="0" max="5">
+        {{rating}}
+
+        <input type="text" placeholder="Search" [(ngModel)]="search">
     </div>
     <ul class="markers-list">
-        <li *ngFor="let marker of (markers | range:range)"
+        <li *ngFor="let marker of (markers | range:range | rating:rating | search:search)"
             (click)="onPointClick(marker)"
             [class.visible]="marker.visible"
             class="marker item"

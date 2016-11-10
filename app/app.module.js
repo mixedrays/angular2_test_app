@@ -16,6 +16,8 @@ var map_component_1 = require("./map.component");
 var points_service_1 = require("./points.service");
 var markers_list_component_1 = require("./markers-list.component");
 var range_pipe_1 = require("./range.pipe");
+var search_pipe_1 = require("./search.pipe");
+var rating_pipe_1 = require("./rating.pipe");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,7 +31,9 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 map_component_1.MapComponent,
                 markers_list_component_1.MarkersListComponent,
-                range_pipe_1.RangePipe
+                range_pipe_1.RangePipe,
+                rating_pipe_1.RatingPipe,
+                search_pipe_1.SearchPipe,
             ],
             providers: [
                 points_service_1.PointsService

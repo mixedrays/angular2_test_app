@@ -9,27 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var MarkersListComponent = (function () {
-    function MarkersListComponent() {
-        this.range = 100;
-        this.rating = 5;
+var SearchPipe = (function () {
+    function SearchPipe() {
     }
-    MarkersListComponent.prototype.onPointClick = function (marker) {
+    SearchPipe.prototype.transform = function (value, args) {
+        if (!value)
+            return false;
+        // Need to make search independent from letter case
+        // or assign empty string if args is undefined
+        args = args ? args.toLowerCase() : '';
+        return value.filter(function (item) {
+            var filtered = item.address.toLowerCase().indexOf(args) !== -1;
+            item.setVisible(filtered);
+            return filtered;
+        });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], MarkersListComponent.prototype, "markers", void 0);
-    MarkersListComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'markers-list-component',
-            templateUrl: 'markers-list.component.html',
-            styleUrls: ['markers-list.component.css']
+    SearchPipe = __decorate([
+        core_1.Pipe({
+            name: 'search'
         }), 
         __metadata('design:paramtypes', [])
-    ], MarkersListComponent);
-    return MarkersListComponent;
+    ], SearchPipe);
+    return SearchPipe;
 }());
-exports.MarkersListComponent = MarkersListComponent;
-//# sourceMappingURL=markers-list.component.js.map
+exports.SearchPipe = SearchPipe;
+//# sourceMappingURL=search.pipe.js.map

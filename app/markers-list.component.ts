@@ -10,6 +10,8 @@ export class MarkersListComponent {
     @Input()
     private markers:Object[];
     private range:number = 100;
+    private rating:number = 5;
+    private search:string;
 
     constructor() {
     }

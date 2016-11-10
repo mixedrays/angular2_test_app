@@ -9,27 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var MarkersListComponent = (function () {
-    function MarkersListComponent() {
-        this.range = 100;
-        this.rating = 5;
+var RatingPipe = (function () {
+    function RatingPipe() {
     }
-    MarkersListComponent.prototype.onPointClick = function (marker) {
+    RatingPipe.prototype.transform = function (value, args) {
+        if (!value)
+            return false;
+        return value.filter(function (item) {
+            var filtered = item.rating < +args;
+            item.setVisible(filtered);
+            return filtered;
+        });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], MarkersListComponent.prototype, "markers", void 0);
-    MarkersListComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'markers-list-component',
-            templateUrl: 'markers-list.component.html',
-            styleUrls: ['markers-list.component.css']
+    RatingPipe = __decorate([
+        core_1.Pipe({
+            name: 'rating'
         }), 
         __metadata('design:paramtypes', [])
-    ], MarkersListComponent);
-    return MarkersListComponent;
+    ], RatingPipe);
+    return RatingPipe;
 }());
-exports.MarkersListComponent = MarkersListComponent;
-//# sourceMappingURL=markers-list.component.js.map
+exports.RatingPipe = RatingPipe;
+//# sourceMappingURL=rating.pipe.js.map

@@ -7,6 +7,8 @@ import {MapComponent} from "./map.component";
 import {PointsService} from "./points.service";
 import {MarkersListComponent} from "./markers-list.component";
 import {RangePipe} from "./range.pipe";
+import {SearchPipe} from "./search.pipe";
+import {RatingPipe} from "./rating.pipe";
 
 @NgModule({
     imports: [
@@ -17,7 +19,9 @@ import {RangePipe} from "./range.pipe";
         AppComponent,
         MapComponent,
         MarkersListComponent,
-        RangePipe
+        RangePipe,
+        RatingPipe,
+        SearchPipe,
     ],
     providers: [
         PointsService
