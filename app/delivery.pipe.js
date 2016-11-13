@@ -8,27 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var RangePipe = (function () {
-    function RangePipe() {
+var core_1 = require("@angular/core");
+var DeliveryPipe = (function () {
+    function DeliveryPipe() {
     }
-    RangePipe.prototype.transform = function (value, args) {
+    DeliveryPipe.prototype.transform = function (value, args) {
         if (!value)
             return false;
-        // Pipe test
         return value.filter(function (item) {
-            var filtered = item.address.length < +args;
+            var filtered = args ? item.delivery_availability === args : true;
             item.setVisible(filtered);
             return filtered;
         });
     };
-    RangePipe = __decorate([
-        core_1.Pipe({
-            name: 'range'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], RangePipe);
-    return RangePipe;
+    return DeliveryPipe;
 }());
-exports.RangePipe = RangePipe;
-//# sourceMappingURL=range.pipe.js.map
+DeliveryPipe = __decorate([
+    core_1.Pipe({
+        name: 'delivery'
+    }),
+    __metadata("design:paramtypes", [])
+], DeliveryPipe);
+exports.DeliveryPipe = DeliveryPipe;
+//# sourceMappingURL=delivery.pipe.js.map

@@ -6,9 +6,11 @@ import {AppComponent} from './app.component';
 import {MapComponent} from "./map.component";
 import {PointsService} from "./points.service";
 import {MarkersListComponent} from "./markers-list.component";
-import {RangePipe} from "./range.pipe";
+import {QtyPipe} from "./qty.pipe";
 import {SearchPipe} from "./search.pipe";
 import {RatingPipe} from "./rating.pipe";
+import {PricePipe} from "./price.pipe";
+import {DeliveryPipe} from "./delivery.pipe";
 
 @NgModule({
     imports: [
@@ -19,8 +21,10 @@ import {RatingPipe} from "./rating.pipe";
         AppComponent,
         MapComponent,
         MarkersListComponent,
-        RangePipe,
+        QtyPipe,
         RatingPipe,
+        PricePipe,
+        DeliveryPipe,
         SearchPipe,
     ],
     providers: [

@@ -9,28 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var SearchPipe = (function () {
-    function SearchPipe() {
+var PricePipe = (function () {
+    function PricePipe() {
     }
-    SearchPipe.prototype.transform = function (value, args) {
+    PricePipe.prototype.transform = function (value, min, max) {
         if (!value)
             return false;
-        // Need to make search independent from letter case
-        // or assign empty string if args is undefined
-        args = args ? args.toLowerCase() : '';
         return value.filter(function (item) {
-            var filtered = item.address.toLowerCase().indexOf(args) !== -1;
+            var price = +item.avg_price.substring(1), // remove currency sign and convert to number
+            filtered = price >= min && price <= +max;
             item.setVisible(filtered);
             return filtered;
         });
     };
-    return SearchPipe;
+    return PricePipe;
 }());
-SearchPipe = __decorate([
+PricePipe = __decorate([
     core_1.Pipe({
-        name: 'search'
+        name: 'price'
     }),
     __metadata("design:paramtypes", [])
-], SearchPipe);
-exports.SearchPipe = SearchPipe;
-//# sourceMappingURL=search.pipe.js.map
+], PricePipe);
+exports.PricePipe = PricePipe;
+//# sourceMappingURL=price.pipe.js.map

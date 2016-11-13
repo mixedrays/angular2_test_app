@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var points_mock_1 = require('./points.mock');
+var points_mock_1 = require("./points.mock");
 var PointsService = (function () {
     function PointsService() {
     }
     PointsService.prototype.getPoints = function () {
         return Promise.resolve(points_mock_1.POINTS);
     };
-    PointsService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], PointsService);
     return PointsService;
 }());
+PointsService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [])
+], PointsService);
 exports.PointsService = PointsService;
 //# sourceMappingURL=points.service.js.map

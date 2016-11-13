@@ -8,28 +8,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var MarkersListComponent = (function () {
     function MarkersListComponent() {
-        this.range = 100;
-        this.rating = 5;
+        this.markerClick = new core_1.EventEmitter();
+        this.filters = {
+            initialQty: 10,
+            rating: 5,
+            avgPriceMin: 0,
+            avgPriceMax: 300,
+            delivery: false,
+            search: null,
+        };
     }
-    MarkersListComponent.prototype.onPointClick = function (marker) {
+    MarkersListComponent.prototype.onMarkerClick = function (marker) {
+        this.markerClick.emit(marker);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], MarkersListComponent.prototype, "markers", void 0);
-    MarkersListComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'markers-list-component',
-            templateUrl: 'markers-list.component.html',
-            styleUrls: ['markers-list.component.css']
-        }), 
-        __metadata('design:paramtypes', [])
-    ], MarkersListComponent);
+    MarkersListComponent.prototype.onFiltersChange = function () {
+        this.filters.initialQty = false;
+    };
     return MarkersListComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], MarkersListComponent.prototype, "markers", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], MarkersListComponent.prototype, "markerClick", void 0);
+MarkersListComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'markers-list-component',
+        templateUrl: 'markers-list.component.html',
+        styleUrls: ['markers-list.component.css']
+    }),
+    __metadata("design:paramtypes", [])
+], MarkersListComponent);
 exports.MarkersListComponent = MarkersListComponent;
 //# sourceMappingURL=markers-list.component.js.map

@@ -1,15 +1,62 @@
 <div class="markers-list-container">
-    <div class="filters">
-        <input type="range" [(ngModel)]="range">
-        {{range}}
-        <input type="range" [(ngModel)]="rating" min="0" max="5">
-        {{rating}}
+    <fieldset class="fieldset filters row">
+        <h2 class="filters-title title">Filters</h2>
 
-        <input type="text" placeholder="Search" [(ngModel)]="search">
-    </div>
+        <input type="text"
+               placeholder="Search by address"
+               [(ngModel)]="filters.search"
+               (ngModelChange)="onFiltersChange()">
+
+        <div class="row">
+            <div class="small-12 medium-6 columns">
+                <label for="avgPriceMin">Price from</label>
+                <input type="number"
+                       placeholder="from"
+                       id="avgPriceMin"
+                       [(ngModel)]="filters.avgPriceMin"
+                       (ngModelChange)="onFiltersChange()"
+                       min="0"
+                       max="300">
+            </div>
+            <div class="small-12 medium-6 columns">
+                <label for="avgPriceMax">To</label>
+                <input type="number"
+                       placeholder="to"
+                       id="avgPriceMax"
+                       [(ngModel)]="filters.avgPriceMax"
+                       (ngModelChange)="onFiltersChange()"
+                       min="0"
+                       max="300">
+            </div>
+        </div>
+
+        <input type="checkbox"
+               id="delivery"
+               [(ngModel)]="filters.delivery"
+               (ngModelChange)="onFiltersChange()">
+        <label for="delivery">Delivery availability</label>
+
+        <label for="rating">Rating</label>
+        0
+        <input type="range"
+               id="rating"
+               [(ngModel)]="filters.rating"
+               (ngModelChange)="onFiltersChange()"
+               min="0"
+               max="5">
+        {{filters.rating}}
+    </fieldset>
+
+    <h2 class="results-title title">Results</h2>
     <ul class="markers-list">
-        <li *ngFor="let marker of (markers | range:range | rating:rating | search:search)"
-            (click)="onPointClick(marker)"
+        <li *ngFor="let marker of (markers
+            | qty:filters.initialQty
+            | rating:filters.rating
+            | price:filters.avgPriceMin:filters.avgPriceMax
+            | delivery:filters.delivery
+            | search:filters.search
+            )"
+            (click)="onMarkerClick(marker)"
             [class.visible]="marker.visible"
             class="marker item"
         >{{marker.address}}</li>

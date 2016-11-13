@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var RatingPipe = (function () {
     function RatingPipe() {
     }
@@ -16,18 +16,18 @@ var RatingPipe = (function () {
         if (!value)
             return false;
         return value.filter(function (item) {
-            var filtered = item.rating < +args;
+            var filtered = item.rating <= +args;
             item.setVisible(filtered);
             return filtered;
         });
     };
-    RatingPipe = __decorate([
-        core_1.Pipe({
-            name: 'rating'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], RatingPipe);
     return RatingPipe;
 }());
+RatingPipe = __decorate([
+    core_1.Pipe({
+        name: 'rating'
+    }),
+    __metadata("design:paramtypes", [])
+], RatingPipe);
 exports.RatingPipe = RatingPipe;
 //# sourceMappingURL=rating.pipe.js.map

@@ -1,15 +1,14 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-    name: 'range'
+    name: 'delivery'
 })
-export class RangePipe implements PipeTransform {
-    transform(value:any, args:any[]):any {
+export class DeliveryPipe implements PipeTransform {
+    transform(value:any, args:boolean):any {
         if (!value) return false;
 
-        // Pipe test
         return value.filter(item => {
-            let filtered = item.address.length < +args;
+            let filtered = args ? item.delivery_availability === args : true;
 
             item.setVisible(filtered);
             return filtered;

@@ -1,9 +1,10 @@
 @import "styles/scss/global";
+@import "styles/scss/settings";
 
 .markers-list-container {
     position: absolute;
     top: 0;
-    width: 90%;
+    width: 50%;
     height: 100%;
     overflow-y: auto;
     background-color: $global-sidebar-bg-color;
@@ -29,15 +30,34 @@
     .marker {
         display: none;
         padding: ceil($global-spacing/2) $global-spacing;
-        border-top: 1px solid #eee;
+        border-top: 1px solid $light-gray;
+        cursor: pointer;
+        transition: background-color .3s;
+        
+        &:hover {
+            background-color: rgba($primary-color, .5);
+        }
 
         &:first-child {
             border-top: none;
-            padding-bottom: 1px;
         }
 
         &.visible {
             display: block;
         }
+    }
+
+    .title {
+        font-size: rem-calc(18);
+        font-weight: bold;
+    }
+
+    .results-title {
+        padding-left: $global-spacing;
+    }
+
+    .filters {
+        margin-top: 0;
+        background: rgba($light-gray, 0.5);
     }
 }

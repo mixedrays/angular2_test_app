@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -7,15 +7,35 @@ import {Component, Input} from '@angular/core';
     styleUrls: ['markers-list.component.css']
 })
 export class MarkersListComponent {
-    @Input()
-    private markers:Object[];
-    private range:number = 100;
-    private rating:number = 5;
-    private search:string;
+    @Input() private markers:Object[];
+    @Output() markerClick = new EventEmitter();
+
+    private filters:Filters = {
+        initialQty: 10,
+        rating: 5,
+        avgPriceMin: 0,
+        avgPriceMax: 300,
+        delivery: false,
+        search: null,
+    };
 
     constructor() {
     }
 
-    onPointClick(marker: Object) {
+    onMarkerClick(marker:Object) {
+        this.markerClick.emit(marker);
     }
+
+    onFiltersChange() {
+        this.filters.initialQty = false;
+    }
+}
+
+interface Filters {
+    initialQty: any,
+    rating: number,
+    avgPriceMin: number,
+    avgPriceMax: number,
+    delivery: boolean,
+    search: string
 }

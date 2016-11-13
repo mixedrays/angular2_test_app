@@ -9,28 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var SearchPipe = (function () {
-    function SearchPipe() {
+var QtyPipe = (function () {
+    function QtyPipe() {
     }
-    SearchPipe.prototype.transform = function (value, args) {
+    QtyPipe.prototype.transform = function (value, args) {
         if (!value)
             return false;
-        // Need to make search independent from letter case
-        // or assign empty string if args is undefined
-        args = args ? args.toLowerCase() : '';
-        return value.filter(function (item) {
-            var filtered = item.address.toLowerCase().indexOf(args) !== -1;
+        return value.filter(function (item, i) {
+            var filtered = args ? i <= +args : true;
             item.setVisible(filtered);
             return filtered;
         });
     };
-    return SearchPipe;
+    return QtyPipe;
 }());
-SearchPipe = __decorate([
+QtyPipe = __decorate([
     core_1.Pipe({
-        name: 'search'
+        name: 'qty'
     }),
     __metadata("design:paramtypes", [])
-], SearchPipe);
-exports.SearchPipe = SearchPipe;
-//# sourceMappingURL=search.pipe.js.map
+], QtyPipe);
+exports.QtyPipe = QtyPipe;
+//# sourceMappingURL=qty.pipe.js.map

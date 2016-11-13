@@ -1,0 +1,16 @@
+@import "../../../node_modules/foundation-sites/scss/global";
+
+$global-spacing: 15px;
+$global-bg-color: white;
+$global-sidebar-bg-color: rgba(white, .9);
+
+// Forms
+$fieldset-border: none;
+$fieldset-padding: $global-spacing;
+$fieldset-margin: $global-spacing 0;
+
+// The Grid
+$grid-column-gutter: (
+        small: 10px,
+        medium: 15px,
+);

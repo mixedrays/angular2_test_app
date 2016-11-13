@@ -1,7 +1,7 @@
 .markers-list-container {
   position: absolute;
   top: 0;
-  width: 90%;
+  width: 50%;
   height: 100%;
   overflow-y: auto;
   background-color: rgba(255, 255, 255, 0.9);
@@ -26,11 +26,26 @@
 .markers-list-container .marker {
   display: none;
   padding: 8px 15px;
-  border-top: 1px solid #eee; }
+  border-top: 1px solid #e6e6e6;
+  cursor: pointer;
+  transition: background-color .3s; }
+
+.markers-list-container .marker:hover {
+  background-color: rgba(33, 153, 232, 0.5); }
 
 .markers-list-container .marker:first-child {
-  border-top: none;
-  padding-bottom: 1px; }
+  border-top: none; }
 
 .markers-list-container .marker.visible {
   display: block; }
+
+.markers-list-container .title {
+  font-size: 1.125rem;
+  font-weight: bold; }
+
+.markers-list-container .results-title {
+  padding-left: 15px; }
+
+.markers-list-container .filters {
+  margin-top: 0;
+  background: rgba(230, 230, 230, 0.5); }
